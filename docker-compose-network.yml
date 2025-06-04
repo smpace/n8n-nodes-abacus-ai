@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n_abacus_network
+    restart: unless-stopped
+    ports:
+      - "0.0.0.0:5678:5678"  # This makes it accessible from other computers
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=admin
+      - N8N_BASIC_AUTH_PASSWORD=admin123
+      # Change this to your computer's IP address
+      - WEBHOOK_URL=http://YOUR_COMPUTER_IP:5678/
+      - GENERIC_TIMEZONE=UTC
+      - N8N_LOG_LEVEL=debug
+      - NODE_ENV=development
+      # Enable community packages
+      - N8N_COMMUNITY_PACKAGES_ENABLED=true
+      # Allow loading custom nodes
+      - N8N_CUSTOM_EXTENSIONS=/home/node/.n8n/custom
+    volumes:
+      # Mount the built node
+      - ./dist:/home/node/.n8n/custom/node_modules/n8n-nodes-abacus-ai
+      # Persist n8n data
+      - n8n_data:/home/node/.n8n
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:13
+    container_name: n8n_postgres_network
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=n8n
+      - POSTGRES_PASSWORD=n8n
+      - POSTGRES_DB=n8n
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  n8n_data:
+  postgres_data: 
