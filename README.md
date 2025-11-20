@@ -38,7 +38,7 @@ For development purposes:
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/n8n-nodes-abacus-ai.git
+git clone https://github.com/smpace/n8n-nodes-abacus-ai.git
 cd n8n-nodes-abacus-ai
 
 # Install dependencies
