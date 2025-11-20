@@ -1,10 +1,10 @@
 # n8n-nodes-abacus-ai
 
-![Abacus.AI](https://img.shields.io/badge/Abacus.AI-Custom%20Node-blue)
+![RouteLLM](https://img.shields.io/badge/RouteLLM-Custom%20Node-blue)
 ![n8n](https://img.shields.io/badge/n8n-Community%20Node-FF6D5A)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-This is an n8n community node that lets you use Abacus.AI's powerful LLM and AI services in your n8n workflows. Abacus.AI is a comprehensive AI platform that provides access to multiple Large Language Models and AI capabilities for prompt writing, predictions, and more.
+This is an n8n community node that lets you use RouteLLM's powerful LLM services in your n8n workflows. RouteLLM provides access to multiple Large Language Models for AI operations.
 
 ## 📦 Installation
 
@@ -55,13 +55,13 @@ pnpm link --global n8n-nodes-abacus-ai
 
 ## 🔐 Credentials
 
-Before using this node, you need to create credentials for Abacus.AI:
+Before using this node, you need to create credentials for RouteLLM:
 
-1. Sign up for an account at [Abacus.AI](https://abacus.ai)
-2. Navigate to your [API Keys Dashboard](https://abacus.ai/app/profile/apikey)
+1. Sign up for an account at [RouteLLM](https://routellm.abacus.ai)
+2. Navigate to your API Keys Dashboard
 3. Generate a new API key
-4. In n8n, create new **Abacus.AI API** credentials
-5. Enter your API key and base URL (leave default unless using custom deployment)
+4. In n8n, create new **RouteLLM API** credentials
+5. Enter your API key and base URL (leave default for legacy operations)
 
 ## 🚀 Operations
 
@@ -72,7 +72,7 @@ This node supports multiple resources and operations:
 #### Send Prompt
 - **Purpose**: Send a prompt to an LLM and get a response
 - **Use Cases**: Content generation, text analysis, question answering
-- **Models Supported**: GPT-4, GPT-4 Turbo, GPT-3.5 Turbo, Claude 3 (Opus/Sonnet/Haiku), Llama 2 70B, Mixtral 8x7B
+- **Models Supported**: RouteLLM, GPT-4o, GPT-4o-mini, O4-mini, O3-pro, O3, O3-mini, GPT-4.1 series, GPT-5 series, OpenAI GPT-OSS-120B, Claude 3.7 Sonnet, Claude Sonnet/Haiku 4 series, Meta Llama models, Gemini models, Qwen models, Grok models, and more
 
 #### Chat Conversation
 - **Purpose**: Continue a conversation with context from previous messages
@@ -111,7 +111,7 @@ This node supports multiple resources and operations:
         "resource": "chatLLM",
         "operation": "sendPrompt",
         "prompt": "Write a professional email template for customer follow-up",
-        "model": "gpt-4-turbo",
+        "model": "gpt-5",
         "temperature": 0.7,
         "maxTokens": 500,
         "systemMessage": "You are a professional business communication expert."
@@ -133,7 +133,7 @@ This node supports multiple resources and operations:
         "resource": "chatLLM",
         "operation": "chatConversation",
         "prompt": "Can you elaborate on the second point?",
-        "model": "claude-3-sonnet",
+        "model": "claude-3-7-sonnet-20250219",
         "conversationHistory": "[{\"role\": \"user\", \"content\": \"List three benefits of automation\"}, {\"role\": \"assistant\", \"content\": \"1. Increased efficiency 2. Reduced errors 3. Cost savings\"}]",
         "temperature": 0.5
       },
@@ -186,10 +186,11 @@ The node supports advanced parameters in the "Additional Fields" section:
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | Prompt | String | Yes | The text prompt to send to the LLM |
-| Model | Options | Yes | LLM model to use (GPT-4, Claude, etc.) |
+| Model | Options | Yes | LLM model to use (see full list above) |
 | Temperature | Number | No | Controls randomness (0-2, default: 0.7) |
 | Max Tokens | Number | No | Maximum response length (1-8000, default: 1000) |
 | System Message | String | No | Sets the AI's behavior and context |
+| Stream | Boolean | No | Whether to stream the response (default: false) |
 | Conversation History | JSON | No | Previous messages for conversation context |
 
 ### Deployment Parameters
@@ -261,6 +262,7 @@ Error responses include:
 
 - **n8n version**: 0.180.0 or later
 - **Node.js**: 18.10.0 or later
+- **RouteLLM API**: v1 (chat completions), v0 (legacy operations)
 - **Abacus.AI API**: v0 (current)
 
 ## 📝 License
@@ -273,12 +275,19 @@ Contributions are welcome! Please read the [contribution guidelines](CONTRIBUTIN
 
 ## 📞 Support
 
-- **Documentation**: [Abacus.AI Help Center](https://abacus.ai/help)
-- **API Reference**: [Abacus.AI API Documentation](https://abacus.ai/help/api/ref)
+- **Documentation**: [RouteLLM Documentation](https://routellm.abacus.ai)
+- **API Reference**: [RouteLLM API](https://routellm.abacus.ai)
 - **Issues**: [GitHub Issues](https://github.com/your-username/n8n-nodes-abacus-ai/issues)
 - **n8n Community**: [n8n Forum](https://community.n8n.io)
 
 ## 🚀 Changelog
+
+### 1.1.0
+- Updated to RouteLLM API
+- Added streaming support
+- Expanded model support with 50+ models including GPT-5 series, Claude 4 series, Gemini models, and more
+- Changed authentication to Bearer token
+- Updated documentation and examples
 
 ### 1.0.0
 - Initial release

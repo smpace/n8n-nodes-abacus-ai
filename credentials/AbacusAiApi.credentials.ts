@@ -3,9 +3,9 @@ import { ICredentialType, INodeProperties } from 'n8n-workflow';
 export class AbacusAiApi implements ICredentialType {
 	name = 'abacusAiApi';
 
-	displayName = 'Abacus.AI API';
+	displayName = 'RouteLLM API';
 
-	documentationUrl = 'https://abacus.ai/help/api/ref';
+	documentationUrl = 'https://routellm.abacus.ai';
 
 	properties: INodeProperties[] = [
 		{
@@ -14,7 +14,7 @@ export class AbacusAiApi implements ICredentialType {
 			type: 'string',
 			typeOptions: { password: true },
 			default: '',
-			description: 'Your Abacus.AI API key. Get it from <a href="https://abacus.ai/app/profile/apikey" target="_blank">API Keys Dashboard</a>.',
+			description: 'Your RouteLLM API key. Get it from the RouteLLM dashboard.',
 			required: true,
 		},
 		{
@@ -22,7 +22,7 @@ export class AbacusAiApi implements ICredentialType {
 			name: 'baseUrl',
 			type: 'string',
 			default: 'https://api.abacus.ai',
-			description: 'The base URL for Abacus.AI API (leave as default unless using a custom deployment)',
+			description: 'The base URL for legacy Abacus.AI API operations (deployments and projects)',
 			required: true,
 		},
 	];
